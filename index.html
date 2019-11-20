@@ -1,1 +1,538 @@
-Hello
+<!doctype html>
+<html>
+	<body>
+		<code>
+<span style="color: #95A5A6">
+/*
+<br />
+  This script has two functions that it is meant to do on one Arduino board (or equivalent).
+<br />
+The first is to power the different parts RGB LEDs using three buttons as inputs. The second
+<br />
+is to play a tune with a speaker using input from two photoresistors. Each photoresistor will
+<br />
+be behind a door. The speaker plays a different tune depending on which door was opened. The
+<br />
+state of each door (open or closed) will be determined by input from the photoresistors.
+<br />
+*/
+</span>
+<br />
+<br />
+<span style="color: #434F54">//Defines the notes</span>
+<br />
+<span style="color: #00979C">float</span> c0 = 16.35;
+<br />
+<span style="color: #00979C">float</span> cs0 = 17.32;
+<br />
+<span style="color: #00979C">float</span> d0 = 18.35;
+<br />
+<span style="color: #00979C">float</span> ds0 = 19.45;
+<br />
+<span style="color: #00979C">float</span> e0 = 20.60;
+<br />
+<span style="color: #00979C">float</span> f0 = 21.83;
+<br />
+<span style="color: #00979C">float</span> fs0 = 23.12;
+<br />
+<span style="color: #00979C">float</span> g0 = 24.50;
+<br />
+<span style="color: #00979C">float</span> gs0 = 25.96;
+<br />
+<span style="color: #00979C">float</span> a0 = 27.50;
+<br />
+<span style="color: #00979C">float</span> as0 = 29.14;
+<br />
+<span style="color: #00979C">float</span> b0 = 30.87;
+<br />
+<span style="color: #00979C">float</span> c1 = 32.70;
+<br />
+<span style="color: #00979C">float</span> cs1 = 34.65;
+<br />
+<span style="color: #00979C">float</span> d1 = 36.71;
+<br />
+<span style="color: #00979C">float</span> ds1 = 38.89;
+<br />
+<span style="color: #00979C">float</span> e1 = 41.20;
+<br />
+<span style="color: #00979C">float</span> f1 = 43.65;
+<br />
+<span style="color: #00979C">float</span> fs = 146.25;
+<br />
+<span style="color: #00979C">float</span> g1 = 49.00;
+<br />
+<span style="color: #00979C">float</span> gs1 = 51.91;
+<br />
+<span style="color: #00979C">float</span> a1 = 55.00;
+<br />
+<span style="color: #00979C">float</span> as1 = 58.27;
+<br />
+<span style="color: #00979C">float</span> b1 = 61.74;
+<br />
+<span style="color: #00979C">float</span> c2 = 65.41;
+<br />
+<span style="color: #00979C">float</span> cs2 = 69.30;
+<br />
+<span style="color: #00979C">float</span> d2 = 73.42;
+<br />
+<span style="color: #00979C">float</span> ds2 = 77.78;
+<br />
+<span style="color: #00979C">float</span> e = 282.41;
+<br />
+<span style="color: #00979C">float</span> f2 = 87.31;
+<br />
+<span style="color: #00979C">float</span> fs2 = 92.50;
+<br />
+<span style="color: #00979C">float</span> g2 = 98.00;
+<br />
+<span style="color: #00979C">float</span> gs2 = 103.83;
+<br />
+<span style="color: #00979C">float</span> a2 = 110.00;
+<br />
+<span style="color: #00979C">float</span> as2 = 116.54;
+<br />
+<span style="color: #00979C">float</span> b2 = 123.47;
+<br />
+<span style="color: #00979C">float</span> c3 = 130.18;
+<br />
+<span style="color: #00979C">float</span> cs3 = 138.59;
+<br />
+<span style="color: #00979C">float</span> d3 = 146.83;
+<br />
+<span style="color: #00979C">float</span> ds3 = 155.56;
+<br />
+<span style="color: #00979C">float</span> e3 = 164.81;
+<br />
+<span style="color: #00979C">float</span> f3 = 174.61;
+<br />
+<span style="color: #00979C">float</span> fs3 = 185.00;
+<br />
+<span style="color: #00979C">float</span> g3 = 196.00;
+<br />
+<span style="color: #00979C">float</span> gs3 = 207.65;
+<br />
+<span style="color: #00979C">float</span> a3 = 220.00;
+<br />
+<span style="color: #00979C">float</span> as3 = 233.08;
+<br />
+<span style="color: #00979C">float</span> b3 = 246.94;
+<br />
+<span style="color: #00979C">float</span> c4 = 261.63;
+<br />
+<span style="color: #00979C">float</span> cs4 = 277.18;
+<br />
+<span style="color: #00979C">float</span> d4 = 293.66;
+<br />
+<span style="color: #00979C">float</span> ds4 = 311.13;
+<br />
+<span style="color: #00979C">float</span> e4 = 329.63;
+<br />
+<span style="color: #00979C">float</span> f4 = 349.23;
+<br />
+<span style="color: #00979C">float</span> fs4 = 369.99;
+<br />
+<span style="color: #00979C">float</span> g4 = 392.00;
+<br />
+<span style="color: #00979C">float</span> gs4 = 415.30;
+<br />
+<span style="color: #00979C">float</span> a4 = 440.00;
+<br />
+<span style="color: #00979C">float</span> as4 = 466.16;
+<br />
+<span style="color: #00979C">float</span> b4 = 493.88;
+<br />
+<span style="color: #00979C">float</span> c5 = 523.25;
+<br />
+<span style="color: #00979C">float</span> cs5 = 554.37;
+<br />
+<span style="color: #00979C">float</span> d5 = 587.33;
+<br />
+<span style="color: #00979C">float</span> ds5 = 622.25;
+<br />
+<span style="color: #00979C">float</span> e5 = 659.25;
+<br />
+<span style="color: #00979C">float</span> f5 = 698.46;
+<br />
+<span style="color: #00979C">float</span> fs5 = 739.99;
+<br />
+<span style="color: #00979C">float</span> g5 = 783.99;
+<br />
+<span style="color: #00979C">float</span> gs5 = 830.61;
+<br />
+<span style="color: #00979C">float</span> a5 = 880.00;
+<br />
+<span style="color: #00979C">float</span> as5 = 932.33;
+<br />
+<span style="color: #00979C">float</span> b5 = 987.77;
+<br />
+<span style="color: #00979C">float</span> c6 = 1046.50;
+<br />
+<span style="color: #00979C">float</span> cs6 = 1108.73;
+<br />
+<span style="color: #00979C">float</span> d6 = 1174.66;
+<br />
+<span style="color: #00979C">float</span> ds6 = 1244.51;
+<br />
+<span style="color: #00979C">float</span> e6 = 1318.51;
+<br />
+<span style="color: #00979C">float</span> f6 = 1396.91;
+<br />
+<span style="color: #00979C">float</span> fs6 = 1479.98;
+<br />
+<span style="color: #00979C">float</span> g6 = 1567.98;
+<br />
+<span style="color: #00979C">float</span> gs6 = 1661.22;
+<br />
+<span style="color: #00979C">float</span> a6 = 1760.00;
+<br />
+<span style="color: #00979C">float</span> as6 = 1864.66;
+<br />
+<span style="color: #00979C">float</span> b6 = 1975.53;
+<br />
+<span style="color: #00979C">float</span> c7 = 2093.00;
+<br />
+<span style="color: #00979C">float</span> cs7 = 2217.46;
+<br />
+<span style="color: #00979C">float</span> d7 = 2249.32;
+<br />
+<span style="color: #00979C">float</span> ds7 = 2489.02;
+<br />
+<span style="color: #00979C">float</span> e7 = 2637.02;
+<br />
+<span style="color: #00979C">float</span> f7 = 2793.83;
+<br />
+<span style="color: #00979C">float</span> fs7 = 2959.96;
+<br />
+<span style="color: #00979C">float</span> g7 = 3135.96;
+<br />
+<span style="color: #00979C">float</span> gs7 = 3322.44;
+<br />
+<span style="color: #00979C">float</span> a7 = 3520.00;
+<br />
+<span style="color: #00979C">float</span> as7 = 3729.31;
+<br />
+<span style="color: #00979C">float</span> b7 = 3951.07;
+<br />
+<span style="color: #00979C">float</span> c8 = 4186.01;
+<br />
+<span style="color: #00979C">float</span> cs8 = 4434.92;
+<br />
+<span style="color: #00979C">float</span> d8 = 4698.63;
+<br />
+<span style="color: #00979C">float</span> ds8 = 4978.03;
+<br />
+<span style="color: #00979C">float</span> e8 = 5274.04;
+<br />
+<span style="color: #00979C">float</span> f8 = 5587.65;
+<br />
+<span style="color: #00979C">float</span> fs8 = 5919.91;
+<br />
+<span style="color: #00979C">float</span> g8 = 6271.93;
+<br />
+<span style="color: #00979C">float</span> gs8 = 6644.88;
+<br />
+<span style="color: #00979C">float</span> a8 = 7040.00;
+<br />
+<span style="color: #00979C">float</span> as = 87458.62;
+<br />
+<span style="color: #00979C">float</span> b8 = 7902.13;
+<br />
+<br />
+<span style="color: #434F54">//Defines the length of the notes in miliseconds</span>
+<br />
+<span style="color: #00979C">int</span> megalovaniaBeat = 1000 / 8;
+<br />
+<span style="color: #00979C">int</span> marioBeat = 1000 / 6;
+<br />
+<br />
+<span style="color: #434F54">//Defines the pin that the speaker should be connected to</span>
+<br />
+<span style="color: #00979C">int</span> speakerPin = 0;
+<br />
+<br />
+<span style="color: #434F54">//Defines the pins that the photoresistors should be connected to</span>
+<br />
+<span style="color: #00979C">int</span> photresistorPin0 = A0;
+<br />
+<span style="color: #00979C">int</span> photresistorValue0 = 0;
+<br />
+<span style="color: #00979C">int</span> photresistorValuePast0;
+<br />
+<br />
+<span style="color: #00979C">int</span> photresistorPin1 = A1;
+<br />
+<span style="color: #00979C">int</span> photresistorValue1 = 1;
+<br />
+<span style="color: #00979C">int</span> photresistorValuePast1;
+<br />
+<br />
+<span style="color: #434F54">//Defines the pins that the buttons should be plugged <span style="color: #00979C">int</span>o</span>
+<br />
+<span style="color: #00979C">int</span> rButtonPin = 1;
+<br />
+<span style="color: #00979C">int</span> gButtonPin = 2;
+<br />
+<span style="color: #00979C">int</span> bButtonPin = 3;
+<br />
+<br />
+<span style="color: #434F54">//Defines the pins that the RGB LED's should be plugged <span style="color: #00979C">int</span>o</span>
+<br />
+<span style="color: #00979C">int</span> rPin =  4;
+<br />
+<span style="color: #00979C">int</span> gPin =  5;
+<br />
+<span style="color: #00979C">int</span> bPin =  6;
+<br />
+<br />
+<span style="color: #434F54">//Stores the states of the RGB LED's</span>
+<br />
+<span style="color: #00979C">int</span> rState = <span style="color: #00979C"><span style="color: #00979C">LOW</span></span>;
+<br />
+<span style="color: #00979C">int</span> gState = <span style="color: #00979C">LOW</span>;
+<br />
+<span style="color: #00979C">int</span> bState = <span style="color: #00979C">LOW</span>;
+<br />
+<br />
+<span style="color: #434F54">//Finds the state of each of the buttons</span>
+<br />
+<span style="color: #00979C">int</span> rButtonState;
+<br />
+<span style="color: #00979C">int</span> gButtonState;
+<br />
+<span style="color: #00979C">int</span> bButtonState;
+<br />
+<br />
+<span style="color: #00979C">void</span> <span style="color: #728E00">setup</span> () {
+<br />
+  <span style="color: #D35400">Serial</span>.<span style="color: #D35400">begin</span> (9600);
+<br />
+<br />
+  <span style="color: #434F54">//The speaker pin is an output</span>
+<br />
+  <span style="color: #D35400">pinMode</span> (speakerPin, <span style="color: #00979C">OUTPUT</span>);
+<br />
+<br />
+  <span style="color: #434F54">//LED pins are outputs</span>
+<br />
+  <span style="color: #D35400">pinMode</span> (rPin, <span style="color: #00979C">OUTPUT</span>);
+<br />
+  <span style="color: #D35400">pinMode</span> (gPin, <span style="color: #00979C">OUTPUT</span>);
+<br />
+  <span style="color: #D35400">pinMode</span> (bPin, <span style="color: #00979C">OUTPUT</span>);
+<br />
+<br />
+  <span style="color: #434F54">//Button pins are inputs</span>
+<br />
+  <span style="color: #D35400">pinMode</span> (rButtonPin, <span style="color: #00979C">INPUT</span>);
+<br />
+  <span style="color: #D35400">pinMode</span> (gButtonPin, <span style="color: #00979C">INPUT</span>);
+<br />
+  <span style="color: #D35400">pinMode</span> (bButtonPin, <span style="color: #00979C">INPUT</span>);
+<br />
+}
+<br />
+<br />
+<span style="color: #00979C">void</span> <span style="color: #728E00">loop</span> () {
+<br />
+<br />
+<span style="color: #434F54">//Reads the photoresistors</span>
+<br />
+photresistorValue0 = <span style="color: #D35400">analogRead</span> (photresistorPin0);
+<br />
+photresistorValue1 = <span style="color: #D35400">analogRead</span> (photresistorPin1);
+<br />
+<br />
+<span style="color: #434F54">//Prints out values from photoresistors</span>
+<br />
+<span style="color: #D35400">Serial</span>.<span style="color: #D35400">println</span> (photresistorValue0);
+<br />
+<span style="color: #D35400">Serial</span>.<span style="color: #D35400">println</span> (photresistorValue1);
+<br />
+<br />
+<span style="color: #434F54">//Plays Flagpole Fanfare in the first door is opened</span>
+<br />
+<span style="color: #728E00">if</span> (photresistorValue0 > 100 && photresistorValuePast0 < 100) {
+<br />
+  flagpoleFanfare ();
+<br />
+}
+<br />
+<br />
+<span style="color: #434F54">//Plays Megalovania if the second door is opened</span>
+<br />
+<span style="color: #728E00">if</span> (photresistorValue1 > 100 && photresistorValuePast1 < 100) {
+<br />
+  megalovania ();
+<br />
+}
+<br />
+<br />
+<span style="color: #434F54">//Finds the state of the buttons</span>
+<br />
+rButtonState = <span style="color: #D35400">digitalRead</span> (rButtonPin);
+<br />
+gButtonState = <span style="color: #D35400">digitalRead</span> (gButtonPin);
+<br />
+bButtonState = <span style="color: #D35400">digitalRead</span> (bButtonPin);
+<br />
+<br />
+<span style="color: #434F54">//Turns the red part of the RGB LED on if the red button is being pressed</span>
+<br />
+<span style="color: #728E00">if</span> (rButtonState == <span style="color: #00979C">HIGH</span>) {
+<br />
+  <span style="color: #D35400">digitalWrite</span> (rPin, <span style="color: #00979C">HIGH</span>);
+<br />
+} else {
+<br />
+  <span style="color: #D35400">digitalWrite</span> (rPin, <span style="color: #00979C">LOW</span>);
+<br />
+}
+<br />
+<br />
+<span style="color: #434F54">//Turns the green part of the RGB LED on if the green button is being pressed</span>
+<br />
+<span style="color: #728E00">if</span> (gButtonState == <span style="color: #00979C">HIGH</span>) {
+<br />
+  <span style="color: #D35400">digitalWrite</span> (gPin, <span style="color: #00979C">HIGH</span>);
+<br />
+} else {
+<br />
+  <span style="color: #D35400">digitalWrite</span> (gPin, <span style="color: #00979C">LOW</span>);
+<br />
+}
+<br />
+<br />
+<span style="color: #434F54">//Turns the green part of the RGB LED on if the green button is being pressed</span>
+<br />
+<span style="color: #728E00">if</span> (bButtonState == <span style="color: #00979C">HIGH</span>) {
+<br />
+  <span style="color: #D35400">digitalWrite</span> (bPin, <span style="color: #00979C">HIGH</span>);
+<br />
+} else {
+<br />
+  <span style="color: #D35400">digitalWrite</span> (bPin, <span style="color: #00979C">LOW</span>);
+<br />
+}
+<br />
+<br />
+<span style="color: #D35400">delay</span> (100);
+<br />
+<br />
+<span style="color: #434F54">//Sets up the past photo sensor value for the next <span style="color: #728E00">loop</span></span>
+<br />
+photresistorValuePast0 = photresistorValue0;
+<br />
+photresistorValuePast1 = photresistorValue1;
+<br />
+}
+<br />
+<br />
+<span style="color: #434F54">//Plays Megalovania</span>
+<br />
+<span style="color: #00979C">void</span> megalovania () {
+<br />
+  playNote (3, d4, megalovaniaBeat);
+<br />
+  playNote (3, d4, megalovaniaBeat);
+<br />
+  playNote (3, d5, megalovaniaBeat);
+<br />
+  playNote (3, d4, megalovaniaBeat);
+<br />
+  playNote (3, a4, megalovaniaBeat);
+<br />
+  playNote (3, d4, megalovaniaBeat * 2);
+<br />
+  playNote (3, gs4, megalovaniaBeat);
+<br />
+  playNote (3, d4, megalovaniaBeat);
+<br />
+  playNote (3, g4, megalovaniaBeat);
+<br />
+  playNote (3, d4, megalovaniaBeat);
+<br />
+  playNote (3, f4, megalovaniaBeat * 2);
+<br />
+  playNote (3, d4, megalovaniaBeat);
+<br />
+  playNote (3, f4, megalovaniaBeat);
+<br />
+  playNote (3, g4, megalovaniaBeat);
+<br />
+}
+<br />
+<br />
+<span style="color: #434F54">//Plays Flagpole Fanfare from Super Mario Bros.</span>
+<br />
+<span style="color: #00979C">void</span> flagpoleFanfare () {
+<br />
+  playNote (3, g3, marioBeat);
+<br />
+  playNote (3, c3, marioBeat);
+<br />
+  playNote (3, e3, marioBeat);
+<br />
+  playNote (3, g4, marioBeat);
+<br />
+  playNote (3, c5, marioBeat);
+<br />
+  playNote (3, e5, marioBeat);
+<br />
+  playNote (3, g5, marioBeat * 3);
+<br />
+  playNote (3, e5, marioBeat * 3);
+<br />
+  playNote (3, gs3, marioBeat);
+<br />
+  playNote (3, c4, marioBeat);
+<br />
+  playNote (3, ds4, marioBeat);
+<br />
+  playNote (3, gs4, marioBeat);
+<br />
+  playNote (3, c5, marioBeat);
+<br />
+  playNote (3, ds5, marioBeat);
+<br />
+  playNote (3, gs5, marioBeat * 3);
+<br />
+  playNote (3, ds5, marioBeat * 3);
+<br />
+  playNote (3, as3, marioBeat);
+<br />
+  playNote (3, d4, marioBeat);
+<br />
+  playNote (3, f4, marioBeat);
+<br />
+  playNote (3, as4, marioBeat);
+<br />
+  playNote (3, d5, marioBeat);
+<br />
+  playNote (3, f5, marioBeat);
+<br />
+  playNote (3, as5, marioBeat * 3);
+<br />
+  playNote (3, as5, marioBeat);
+<br />
+  playNote (3, as5, marioBeat);
+<br />
+  playNote (3, as5, marioBeat);
+<br />
+  playNote (3, c6, marioBeat * 6);
+<br />
+}
+<br />
+<br />
+<span style="color: #434F54">//Plays a note with a small pause at the end</span>
+<br />
+<span style="color: #00979C">void</span> playNote (<span style="color: #00979C">int</span> speakerPin, <span style="color: #00979C">float</span> note, <span style="color: #00979C">long</span> duration) {
+<br />
+  <span style="color: #D35400">tone</span> (speakerPin, note, duration - 50);
+<br />
+  <span style="color: #D35400">delay</span> (duration);
+<br />
+}
+<br />
+		</code>
+	</body>
+</html>
