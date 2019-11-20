@@ -334,7 +334,6 @@ state of each door (open or closed) will be determined by input from the photore
 <br />
 <span style="color: #00979C">void</span> <span style="color: #728E00">loop</span> () {
 <br />
-<br />
 <span style="color: #434F54">//Reads the photoresistors</span>
 <br />
 photresistorValue0 = <span style="color: #D35400">analogRead</span> (photresistorPin0);
@@ -418,7 +417,7 @@ bButtonState = <span style="color: #D35400">digitalRead</span> (bButtonPin);
 <span style="color: #D35400">delay</span> (100);
 <br />
 <br />
-<span style="color: #434F54">//Sets up the past photo sensor value for the next <span style="color: #728E00">loop</span></span>
+<span style="color: #434F54">//Sets up the past photo sensor value for the next loop</span>
 <br />
 photresistorValuePast0 = photresistorValue0;
 <br />
