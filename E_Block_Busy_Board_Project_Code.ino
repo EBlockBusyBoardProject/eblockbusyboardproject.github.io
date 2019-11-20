@@ -1,3 +1,11 @@
+/*
+  This script has two functions that it is meant to do on one Arduino board (or equivalent).
+The first is to power the different parts RGB LEDs using three buttons as inputs. The second
+is to play a tune with a speaker using input from two photoresistors. Each photoresistor will
+be behind a door. The speaker plays a different tune depending on which door was opened. The
+state of each door (open or closed) will be determined by input from the photoresistors.
+*/
+
 //Defines the notes
 float c0 = 16.35;
 float cs0 = 17.32;
@@ -144,32 +152,32 @@ int rButtonState;
 int gButtonState;
 int bButtonState;
 
-void setup() {  
-  Serial.begin(9600);
+void setup () {  
+  Serial.begin (9600);
 
   //The speaker pin is an output
   pinMode (speakerPin, OUTPUT);
   
   //LED pins are outputs
-  pinMode(rPin, OUTPUT);
-  pinMode(gPin, OUTPUT);
-  pinMode(bPin, OUTPUT);
+  pinMode (rPin, OUTPUT);
+  pinMode (gPin, OUTPUT);
+  pinMode (bPin, OUTPUT);
 
   //Button pins are inputs
-  pinMode(rButtonPin, INPUT);
-  pinMode(gButtonPin, INPUT);
-  pinMode(bButtonPin, INPUT);
+  pinMode (rButtonPin, INPUT);
+  pinMode (gButtonPin, INPUT);
+  pinMode (bButtonPin, INPUT);
 }
 
-void loop() {
+void loop () {
 
 //Reads the photoresistors
-photresistorValue0 = analogRead(photresistorPin0);
-photresistorValue1 = analogRead(photresistorPin1);
+photresistorValue0 = analogRead (photresistorPin0);
+photresistorValue1 = analogRead (photresistorPin1);
 
 //Prints out values from photoresistors
-Serial.println(photresistorValue0);
-Serial.println(photresistorValue1);
+Serial.println (photresistorValue0);
+Serial.println (photresistorValue1);
 
 //Plays Flagpole Fanfare in the first door is opened
 if (photresistorValue0 > 100 && photresistorValuePast0 < 100) {
@@ -207,7 +215,7 @@ if (bButtonState == HIGH) {
   digitalWrite (bPin, LOW);
 }
 
-delay(100);
+delay (100);
 
 //Sets up the past photo sensor value for the next loop
 photresistorValuePast0 = photresistorValue0;
@@ -261,7 +269,7 @@ void flagpoleFanfare () {
   playNote (3, as5, marioBeat);
   playNote (3, as5, marioBeat);
   playNote (3, c6, marioBeat * 6);
-};
+}
 
 //Plays a note with a small pause at the end
 void playNote (int speakerPin, float note, long duration) {
