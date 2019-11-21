@@ -3,3 +3,14 @@
   font-family: Arial;
   text-align: center;
 }
+
+#bar {
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+#bar: hover {
+  background-color: #FFFFFF;
+  color: #000000;
+}
