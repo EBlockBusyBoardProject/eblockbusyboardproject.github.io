@@ -1,7 +1,10 @@
+body {
+  margin: 0px;
+}
+
 #title {
   background-color: #00FFFF;
   font-family: Arial;
-  margin: 0px;
   padding: 100px;
   text-align: center;
 }
