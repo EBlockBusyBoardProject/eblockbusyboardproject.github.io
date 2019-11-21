@@ -11,15 +11,15 @@ body {
 
 #bar {
   background-color: #000000;
-  color: #FFFFFF;
   text-align: left;
 }
 
 #bar a {
+  color: #FFFFFF;
   text-decoration: none;
 }
 
-#bar a: hover {
+#bar a:hover {
   background-color: #FFFFFF;
   color: #000000;
 }
