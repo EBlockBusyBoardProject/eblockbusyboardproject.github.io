@@ -4,13 +4,13 @@
   text-align: center;
 }
 
-#bar {
+#bar a {
   background-color: #000000;
   color: #FFFFFF;
   text-align: left;
 }
 
-#bar: hover {
+#bar a: hover {
   background-color: #FFFFFF;
   color: #000000;
 }
