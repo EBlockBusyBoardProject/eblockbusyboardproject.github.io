@@ -121,7 +121,7 @@ int megalovaniaBeat = 1000 / 8;
 int marioBeat = 1000 / 6;
 
 //Defines the pin that the speaker should be connected to
-int speakerPin = 0;
+int speakerPin = 7;
 
 //Defines the pins that the photoresistors should be connected to
 int photresistorPin0 = A0;
@@ -133,14 +133,14 @@ int photresistorValue1 = 1;
 int photresistorValuePast1;
 
 //Defines the pins that the buttons should be plugged into
-int rButtonPin = 1;
-int gButtonPin = 2;
-int bButtonPin = 3;
+int rButtonPin = 10;
+int gButtonPin = 9;
+int bButtonPin = 8;
 
 //Defines the pins that the RGB LED's should be plugged into
-int rPin =  4;
-int gPin =  5;
-int bPin =  6;
+int rPin =  13;
+int gPin =  12;
+int bPin =  11;
 
 //Stores the states of the RGB LED's
 int rState = LOW;
@@ -222,7 +222,7 @@ photresistorValuePast0 = photresistorValue0;
 photresistorValuePast1 = photresistorValue1;
 }
 
-//Plays Megalovania
+//Plays Megalovania from Undertale
 void megalovania () {
   playNote (3, d4, megalovaniaBeat);
   playNote (3, d4, megalovaniaBeat);
