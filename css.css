@@ -1,10 +1,10 @@
 body {
+  font-family: Arial;
   margin: 0px;
 }
 
 #title {
   background-color: #00FFFF;
-  font-family: Arial;
   padding: 100px;
   text-align: center;
 }
@@ -13,6 +13,10 @@ body {
   background-color: #000000;
   color: #FFFFFF;
   text-align: left;
+}
+
+#bar a {
+  text-decoration: none;
 }
 
 #bar a: hover {
