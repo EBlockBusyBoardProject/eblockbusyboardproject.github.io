@@ -133,9 +133,9 @@ int photresistorValue1 = 1;
 int photresistorValuePast1;
 
 //Defines the pins that the buttons should be plugged into
-int rButtonPin = 10;
+int rButtonPin = 8;
 int gButtonPin = 9;
-int bButtonPin = 8;
+int bButtonPin = 10;
 
 //Defines the pins that the RGB LED's should be plugged into
 int rPin =  13;
@@ -224,55 +224,55 @@ photresistorValuePast1 = photresistorValue1;
 
 //Plays Megalovania from Undertale
 void megalovania () {
-  playNote (3, d4, megalovaniaBeat);
-  playNote (3, d4, megalovaniaBeat);
-  playNote (3, d5, megalovaniaBeat);
-  playNote (3, d4, megalovaniaBeat);
-  playNote (3, a4, megalovaniaBeat);
-  playNote (3, d4, megalovaniaBeat * 2);
-  playNote (3, gs4, megalovaniaBeat);
-  playNote (3, d4, megalovaniaBeat);
-  playNote (3, g4, megalovaniaBeat);
-  playNote (3, d4, megalovaniaBeat);
-  playNote (3, f4, megalovaniaBeat * 2);
-  playNote (3, d4, megalovaniaBeat);
-  playNote (3, f4, megalovaniaBeat);
-  playNote (3, g4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
+  playNote (speakerPin, d5, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
+  playNote (speakerPin, a4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat * 2);
+  playNote (speakerPin, gs4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
+  playNote (speakerPin, g4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
+  playNote (speakerPin, f4, megalovaniaBeat * 2);
+  playNote (speakerPin, d4, megalovaniaBeat);
+  playNote (speakerPin, f4, megalovaniaBeat);
+  playNote (speakerPin, g4, megalovaniaBeat);
 }
 
 //Plays Flagpole Fanfare from Super Mario Bros.
 void flagpoleFanfare () {
-  playNote (3, g3, marioBeat);
-  playNote (3, c3, marioBeat);
-  playNote (3, e3, marioBeat);
-  playNote (3, g4, marioBeat);
-  playNote (3, c5, marioBeat);
-  playNote (3, e5, marioBeat);
-  playNote (3, g5, marioBeat * 3);
-  playNote (3, e5, marioBeat * 3);
-  playNote (3, gs3, marioBeat);
-  playNote (3, c4, marioBeat);
-  playNote (3, ds4, marioBeat);
-  playNote (3, gs4, marioBeat);
-  playNote (3, c5, marioBeat);
-  playNote (3, ds5, marioBeat);
-  playNote (3, gs5, marioBeat * 3);
-  playNote (3, ds5, marioBeat * 3);
-  playNote (3, as3, marioBeat);
-  playNote (3, d4, marioBeat);
-  playNote (3, f4, marioBeat);
-  playNote (3, as4, marioBeat);
-  playNote (3, d5, marioBeat);
-  playNote (3, f5, marioBeat);
-  playNote (3, as5, marioBeat * 3);
-  playNote (3, as5, marioBeat);
-  playNote (3, as5, marioBeat);
-  playNote (3, as5, marioBeat);
-  playNote (3, c6, marioBeat * 6);
+  playNote (speakerPin, g3, marioBeat);
+  playNote (speakerPin, c3, marioBeat);
+  playNote (speakerPin, e3, marioBeat);
+  playNote (speakerPin, g4, marioBeat);
+  playNote (speakerPin, c5, marioBeat);
+  playNote (speakerPin, e5, marioBeat);
+  playNote (speakerPin, g5, marioBeat * 3);
+  playNote (speakerPin, e5, marioBeat * 3);
+  playNote (speakerPin, gs3, marioBeat);
+  playNote (speakerPin, c4, marioBeat);
+  playNote (speakerPin, ds4, marioBeat);
+  playNote (speakerPin, gs4, marioBeat);
+  playNote (speakerPin, c5, marioBeat);
+  playNote (speakerPin, ds5, marioBeat);
+  playNote (speakerPin, gs5, marioBeat * 3);
+  playNote (speakerPin, ds5, marioBeat * 3);
+  playNote (speakerPin, as3, marioBeat);
+  playNote (speakerPin, d4, marioBeat);
+  playNote (speakerPin, f4, marioBeat);
+  playNote (speakerPin, as4, marioBeat);
+  playNote (speakerPin, d5, marioBeat);
+  playNote (speakerPin, f5, marioBeat);
+  playNote (speakerPin, as5, marioBeat * 3);
+  playNote (speakerPin, as5, marioBeat);
+  playNote (speakerPin, as5, marioBeat);
+  playNote (speakerPin, as5, marioBeat);
+  playNote (speakerPin, c6, marioBeat * 6);
 }
 
 //Plays a note with a small pause at the end
-void playNote (int speakerPin, float note, long duration) {
-  tone (speakerPin, note, duration - 50);
+void playNote (int pin, float note, long duration) {
+  tone (pin, note, duration - 50);
   delay (duration);  
 }
