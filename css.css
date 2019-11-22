@@ -35,6 +35,7 @@ h1 {
 }
 
 img {
+  height: auto;
+  max-width: 100%;
   text-align: center;
-  width: 100%;
 }
