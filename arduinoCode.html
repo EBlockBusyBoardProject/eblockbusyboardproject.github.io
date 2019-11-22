@@ -284,20 +284,20 @@ state of each door (open or closed) will be determined by input from the photore
 <br />
 <span style="color: #434F54">//Defines the pins that the buttons should be plugged <span style="color: #00979C">int</span>o</span>
 <br />
-<span style="color: #00979C">int</span> rButtonPin = 10;
+<span style="color: #00979C">int</span> rButtonPin = 8;
 <br />
 <span style="color: #00979C">int</span> gButtonPin = 9;
 <br />
-<span style="color: #00979C">int</span> bButtonPin = 8;
+<span style="color: #00979C">int</span> bButtonPin = 10;
 <br />
 <br />
 <span style="color: #434F54">//Defines the pins that the RGB LED's should be plugged <span style="color: #00979C">int</span>o</span>
 <br />
-<span style="color: #00979C">int</span> rPin =  11;
+<span style="color: #00979C">int</span> rPin =  13;
 <br />
 <span style="color: #00979C">int</span> gPin =  12;
 <br />
-<span style="color: #00979C">int</span> bPin =  13;
+<span style="color: #00979C">int</span> bPin =  11;
 <br />
 <br />
 <span style="color: #434F54">//Stores the states of the RGB LED's</span>
@@ -446,33 +446,33 @@ photresistorValuePast1 = photresistorValue1;
 <br />
 <span style="color: #00979C">void</span> megalovania () {
 <br />
-  playNote (3, d4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
 <br />
-  playNote (3, d4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
 <br />
-  playNote (3, d5, megalovaniaBeat);
+  playNote (speakerPin, d5, megalovaniaBeat);
 <br />
-  playNote (3, d4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
 <br />
-  playNote (3, a4, megalovaniaBeat);
+  playNote (speakerPin, a4, megalovaniaBeat);
 <br />
-  playNote (3, d4, megalovaniaBeat * 2);
+  playNote (speakerPin, d4, megalovaniaBeat * 2);
 <br />
-  playNote (3, gs4, megalovaniaBeat);
+  playNote (speakerPin, gs4, megalovaniaBeat);
 <br />
-  playNote (3, d4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
 <br />
-  playNote (3, g4, megalovaniaBeat);
+  playNote (speakerPin, g4, megalovaniaBeat);
 <br />
-  playNote (3, d4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
 <br />
-  playNote (3, f4, megalovaniaBeat * 2);
+  playNote (speakerPin, f4, megalovaniaBeat * 2);
 <br />
-  playNote (3, d4, megalovaniaBeat);
+  playNote (speakerPin, d4, megalovaniaBeat);
 <br />
-  playNote (3, f4, megalovaniaBeat);
+  playNote (speakerPin, f4, megalovaniaBeat);
 <br />
-  playNote (3, g4, megalovaniaBeat);
+  playNote (speakerPin, g4, megalovaniaBeat);
 <br />
 }
 <br />
@@ -481,68 +481,68 @@ photresistorValuePast1 = photresistorValue1;
 <br />
 <span style="color: #00979C">void</span> flagpoleFanfare () {
 <br />
-  playNote (3, g3, marioBeat);
+  playNote (speakerPin, g3, marioBeat);
 <br />
-  playNote (3, c3, marioBeat);
+  playNote (speakerPin, c3, marioBeat);
 <br />
-  playNote (3, e3, marioBeat);
+  playNote (speakerPin, e3, marioBeat);
 <br />
-  playNote (3, g4, marioBeat);
+  playNote (speakerPin, g4, marioBeat);
 <br />
-  playNote (3, c5, marioBeat);
+  playNote (speakerPin, c5, marioBeat);
 <br />
-  playNote (3, e5, marioBeat);
+  playNote (speakerPin, e5, marioBeat);
 <br />
-  playNote (3, g5, marioBeat * 3);
+  playNote (speakerPin, g5, marioBeat * 3);
 <br />
-  playNote (3, e5, marioBeat * 3);
+  playNote (speakerPin, e5, marioBeat * 3);
 <br />
-  playNote (3, gs3, marioBeat);
+  playNote (speakerPin, gs3, marioBeat);
 <br />
-  playNote (3, c4, marioBeat);
+  playNote (speakerPin, c4, marioBeat);
 <br />
-  playNote (3, ds4, marioBeat);
+  playNote (speakerPin, ds4, marioBeat);
 <br />
-  playNote (3, gs4, marioBeat);
+  playNote (speakerPin, gs4, marioBeat);
 <br />
-  playNote (3, c5, marioBeat);
+  playNote (speakerPin, c5, marioBeat);
 <br />
-  playNote (3, ds5, marioBeat);
+  playNote (speakerPin, ds5, marioBeat);
 <br />
-  playNote (3, gs5, marioBeat * 3);
+  playNote (speakerPin, gs5, marioBeat * 3);
 <br />
-  playNote (3, ds5, marioBeat * 3);
+  playNote (speakerPin, ds5, marioBeat * 3);
 <br />
-  playNote (3, as3, marioBeat);
+  playNote (speakerPin, as3, marioBeat);
 <br />
-  playNote (3, d4, marioBeat);
+  playNote (speakerPin, d4, marioBeat);
 <br />
-  playNote (3, f4, marioBeat);
+  playNote (speakerPin, f4, marioBeat);
 <br />
-  playNote (3, as4, marioBeat);
+  playNote (speakerPin, as4, marioBeat);
 <br />
-  playNote (3, d5, marioBeat);
+  playNote (speakerPin, d5, marioBeat);
 <br />
-  playNote (3, f5, marioBeat);
+  playNote (speakerPin, f5, marioBeat);
 <br />
-  playNote (3, as5, marioBeat * 3);
+  playNote (speakerPin, as5, marioBeat * 3);
 <br />
-  playNote (3, as5, marioBeat);
+  playNote (speakerPin, as5, marioBeat);
 <br />
-  playNote (3, as5, marioBeat);
+  playNote (speakerPin, as5, marioBeat);
 <br />
-  playNote (3, as5, marioBeat);
+  playNote (speakerPin, as5, marioBeat);
 <br />
-  playNote (3, c6, marioBeat * 6);
+  playNote (speakerPin, c6, marioBeat * 6);
 <br />
 }
 <br />
 <br />
 <span style="color: #434F54">//Plays a note with a small pause at the end</span>
 <br />
-<span style="color: #00979C">void</span> playNote (<span style="color: #00979C">int</span> speakerPin, <span style="color: #00979C">float</span> note, <span style="color: #00979C">long</span> duration) {
+<span style="color: #00979C">void</span> playNote (<span style="color: #00979C">int</span> pin, <span style="color: #00979C">float</span> note, <span style="color: #00979C">long</span> duration) {
 <br />
-  <span style="color: #D35400">tone</span> (speakerPin, note, duration - 50);
+  <span style="color: #D35400">tone</span> (pin, note, duration - 50);
 <br />
   <span style="color: #D35400">delay</span> (duration);
 <br />
