@@ -3,6 +3,10 @@ body {
   margin: 0px;
 }
 
+h1 {
+  margin: 0px;
+}
+
 #title {
   background-color: #00FFFF;
   padding: 8%;
@@ -10,7 +14,7 @@ body {
 }
 
 #by {
-  font-size: 32%;
+  font-size: 75%;
 }
 
 #bar {
